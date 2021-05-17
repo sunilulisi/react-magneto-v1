@@ -78,7 +78,7 @@ const reactGenerator = async () => {
                       if (err) throw err;
 
                       generateJSXFile(masterLayout).then((data) => {
-                        fs.writeFile(path.join(`./output/${projName}/src/`, `Employee.js`), data, (err) => {
+                        fs.writeFile(path.join(`./output/${projName}/src/`, `${projName}.js`), data, (err) => {
                           // throws an error, you could also catch it here
                           if (err) throw err;
 

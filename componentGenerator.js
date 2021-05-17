@@ -1,4 +1,5 @@
 const generateComponent = (masterLayout, components) => {
+  const cssLibrary = 'primereact';
   const name = masterLayout.componentName;
   let optList = masterLayout.componentList.filter(
     (comp) => comp.type == 'RadioButton' || comp.type == 'DropDown' || comp.type == 'CheckBox'
@@ -39,6 +40,12 @@ const generateComponent = (masterLayout, components) => {
     jsxCode +
     `import {useState, useEffect} from 'react';
     import { ${[...new Set(materialComponents.map((comp) => comp.compName))].join(', ')} } from '@material-ui/core'
+    ${
+      cssLibrary === 'primereact'
+        ? `import 'primereact/resources/themes/saga-blue/theme.css';
+          import 'primereact/resources/primereact.min.css';`
+        : ''
+    }
     import './App.css';
    let componentOptions = ${JSON.stringify(componentOptions)} 
    ${chartData}
