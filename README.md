@@ -1,1 +1,1 @@
-# react-magneto
+# react-magneto for Travelers
