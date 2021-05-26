@@ -1,6 +1,8 @@
 const FormLabel = require("../FormLabel/FormLabel");
 const getSearchField = (attributes) => {
-  return `<Grid item xs={2} alignItems="flex-start" className="wrapper">   
+  return `
+  <Grid item lg={4}>
+    <Grid item lg={12} alignItems="flex-start" className="wrapper">     
     ${FormLabel.getFormLebel(attributes)} 
     </Grid>
     <Grid item xs={4} alignItems="flex-start" className="wrapper">
@@ -17,6 +19,7 @@ const getSearchField = (attributes) => {
       </InputAdornment>
     }
   />
+      </Grid>
       </Grid>`;
 };
 

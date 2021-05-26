@@ -4,16 +4,19 @@ const getRadioGroup = (attributes) => {
   let component = "";
 
   if (attributes.library === "materialUi") {
-    component = ` <Grid item lg={4} className="wrapper">
+    component = `<Grid item lg={4}>
+      <Grid item lg={12} alignItems="flex-start" className="wrapper">     
     ${FormLabel.getFormLebel(attributes)}
     <RadioGroup aria-label="${attributes.id}" name="${attributes.label}" row>
         {componentOptions.${attributes.id}Options.map((item) => (
             <FormControlLabel value={item} control={<Radio />} label={item} /> ))}
     </RadioGroup>
 </Grid>
+</Grid>
     `;
   } else if (attributes.library === "primeReact") {
-    component = `<div className="p-field p-grid">    
+    component = `<div>
+    <div className="p-field p-grid">    
       <label htmlFor="${attributes.id}Label" className="p-col-fixed" style={{width:'250px'}}>${attributes.label}</label>
       <div className="p-col">
         <div className="p-formgroup-inline">
@@ -25,12 +28,11 @@ const getRadioGroup = (attributes) => {
           ))}
       </div>      
     </div>
+  </div>
   </div>`;
   }
 
-  return `<div> 
-       ${component}
-    </div>`;
+  return `${component}`;
 };
 
 module.exports = { getRadioGroup };

@@ -4,23 +4,23 @@ const getCheckBox = (attributes) => {
   let component = "";
 
   if (attributes.library === "materialUi") {
-    component = `<Grid item lg={12} alignItems="flex-start" className="columnMain">
-    ${FormLabel.getFormLebel(attributes)}  
-        <TableBody>
-          <TableRow>              
-            <FormGroup row="true">
-                {componentOptions.${attributes.id}Options.map((item) => (
-                  <TableCell className="column">
-                    <FormControlLabel control={<Checkbox name={item} />} label={item} />
-                  </TableCell>  
-                    ))}
-            </FormGroup>
-          </TableRow>
-        </TableBody>
-  </Grid>
+    component = `
+    <Grid item lg={4}>
+  <Grid item lg={12} alignItems="flex-start" className="columnMain">
+            ${FormLabel.getFormLebel(attributes)}              
+                    <FormGroup row="true">
+                        {componentOptions.${
+                          attributes.id
+                        }Options.map((item) => (
+                            <FormControlLabel control={<Checkbox name={item} />} label={item} />
+                            ))}
+                    </FormGroup>
+          </Grid>
+      </Grid>
   `;
   } else if (attributes.library === "primeReact") {
-    component = `<div className="p-field p-grid"> 
+    component = `<div>
+    <div className="p-field p-grid"> 
     <label htmlFor="${attributes.id}Label" className="p-col-fixed" style={{width:'250px'}}>${attributes.label}</label>
     <div className="p-col">
       <div className="p-formgroup-inline">
@@ -33,12 +33,11 @@ const getCheckBox = (attributes) => {
         </div>
       </div>  
  </div>
+ </div>
 `;
   }
 
-  return `<div> 
-       ${component}
-    </div>`;
+  return `${component}`;
 };
 
 module.exports = { getCheckBox };
