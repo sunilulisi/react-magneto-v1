@@ -1,11 +1,9 @@
 const FormLabel = require("../FormLabel/FormLabel");
 const getSearchField = (attributes) => {
+  let className = attributes.className || "child";
   return `
-  <Grid item lg={4}>
-    <Grid item lg={12} alignItems="flex-start" className="wrapper">     
-    ${FormLabel.getFormLebel(attributes)} 
-    </Grid>
-    <Grid item xs={4} alignItems="flex-start" className="wrapper">
+  <div class="${className}">  
+    ${FormLabel.getFormLebel(attributes)}
     <OutlinedInput id="${attributes.id}" type="search"  placeholder="${
     attributes.placeHolder
   }"  variant="outlined"
@@ -19,8 +17,7 @@ const getSearchField = (attributes) => {
       </InputAdornment>
     }
   />
-      </Grid>
-      </Grid>`;
+      </div>`;
 };
 
 module.exports = { getSearchField };

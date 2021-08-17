@@ -2,11 +2,9 @@ const FormLabel = require("../FormLabel/FormLabel");
 
 const getCheckBox = (attributes) => {
   let component = "";
-
+  let className = attributes.className || "child-row";
   if (attributes.library === "materialUi") {
-    component = `
-    <Grid item lg={4}>
-  <Grid item lg={12} alignItems="flex-start" className="columnMain">
+    component = `<div className="${className}">
             ${FormLabel.getFormLebel(attributes)}              
                     <FormGroup row="true">
                         {componentOptions.${
@@ -15,14 +13,10 @@ const getCheckBox = (attributes) => {
                             <FormControlLabel control={<Checkbox name={item} />} label={item} />
                             ))}
                     </FormGroup>
-          </Grid>
-      </Grid>
-  `;
+          </div>`;
   } else if (attributes.library === "primeReact") {
-    component = `<div>
-    <div className="p-field p-grid"> 
-    <label htmlFor="${attributes.id}Label" className="p-col-fixed" style={{width:'250px'}}>${attributes.label}</label>
-    <div className="p-col">
+    component = `<div className="${className}">
+    <label htmlFor="${attributes.id}Label" className="p-col-fixed formlabel">${attributes.label}</label>
       <div className="p-formgroup-inline">
     {componentOptions.${attributes.id}Options.map((item) => (
         <div className="p-field-checkbox">
@@ -31,10 +25,7 @@ const getCheckBox = (attributes) => {
         </div>      
         ))}
         </div>
-      </div>  
- </div>
- </div>
-`;
+      </div>`;
   }
 
   return `${component}`;

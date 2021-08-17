@@ -13,6 +13,7 @@ const generateComponent = ( componentName, componentData, componentGenerator) =>
 const generateJSX = async (masterLayout) => {
   return new Promise((resolve, reject) => {
     let componentData = [],
+    //masterLayout.library = 'primeReact';
       library = masterLayout.library,
       componentGenerator;
 

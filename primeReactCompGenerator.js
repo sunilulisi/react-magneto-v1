@@ -36,7 +36,19 @@ const generateComponent = (masterLayout, components) => {
   const primeComponents = components.filter(
     (comp) => comp.compName && comp.compName !== "Chart"
   );
-  let jsxCode = "";
+  let jsxCode = "", tableJsxCode= '';
+  if(tableDataApi && tableDataApi[0]) {
+    tableJsxCode = `const [tableColumns, setTableColumns] = useState([]);
+    const [tableRows, setTableRows] = useState([]);
+    useEffect(() => {
+      fetch("${tableDataApi[0].attributes.api}")
+        .then((response) => response.json())
+        .then((data) => {
+          setTableColumns(data.columns);
+          setTableRows(data.rows);
+        });
+    }, []);`
+  }
 
   if (chartCmpList && chartCmpList.length > 0) {
     chartCmpList.forEach((comp) => {
@@ -71,16 +83,7 @@ const generateComponent = (masterLayout, components) => {
  const ${name} = () => {
   let initialValues = ${JSON.stringify(initialValues)}
   const [values, setValues] = useState(initialValues);  
-  const [tableColumns, setTableColumns] = useState([]);
-  const [tableRows, setTableRows] = useState([]);
-  useEffect(() => {
-    fetch("${tableDataApi[0].attributes.api}")
-      .then((response) => response.json())
-      .then((data) => {
-        setTableColumns(data.columns);
-        setTableRows(data.rows);
-      });
-  }, []); 
+  ${tableJsxCode}
   
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -94,7 +97,7 @@ const generateComponent = (masterLayout, components) => {
     setValues({ ...values, [name]: selectedOptions });
   };
   return (
-    <div>
+    <div className="parent">
      ${label}            
         ${components.map((comp) => `${comp.jsx}`).join("\n")}
     </div>

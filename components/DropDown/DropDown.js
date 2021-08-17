@@ -1,12 +1,10 @@
 const getDropDown = (attributes) => {
     let component = ''
+    let className = attributes.className || "child";
     if(attributes.library === 'materialUi') {
-        component = ` 
-        <Grid item lg={4}>
-            <Grid item lg={12} alignItems="flex-start" className="wrapper">
-                <InputLabel id="${attributes.id}Label" required={${attributes.mandatory}} className="formlabel"> ${attributes.label} </InputLabel>
-                </Grid>
-                <Grid item xs={4} alignItems="flex-start" className="wrapper">
+        component = `
+        <div className="${className}">
+                <FormLabel id="${attributes.id}Label" required={${attributes.mandatory}} className="formlabel"> ${attributes.label} </FormLabel>
                 <Select id="${attributes.id}" value={values.${attributes.id}} displayEmpty variant="outlined" style={{ minWidth: 278 }}>
                     <MenuItem value="">
                         <em>None</em>
@@ -15,22 +13,19 @@ const getDropDown = (attributes) => {
                         <MenuItem key={item} value={item}>{item}</MenuItem>        
                     )}
                 </Select>
-           </Grid>
-        </Grid>
+           </div>
 
 `
     } else if(attributes.library === 'primeReact') {
-        component = `<div>
-        <div className="p-field p-grid">
-        <label htmlFor="${attributes.id}Label" className="p-col-fixed" style={{width:'250px'}}>${attributes.label}</label>
-        <div className="p-col">
+        component = `<div className="${className}">  
+        <label htmlFor="${attributes.id}Label" className="p-col-fixed formlabel">${attributes.label}</label>
+        <div className="p-col dropDown">
         <Dropdown value={values.${attributes.id}} id="${attributes.id}" onChange= {handleInputChange} name="${attributes.id}" options={componentOptions.${attributes.id}Options.map(item => {let resp = {}
             resp.label = item
             resp.value = item              
             return resp
           })} placeholder="Select an option" />
         </div>
-    </div>
     </div>`
     }
 
